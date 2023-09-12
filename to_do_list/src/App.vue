@@ -1,8 +1,6 @@
 <script setup lang="ts">
-  import TasksContent from './components/materials/TasksContent.vue';
   import FormLogin from './components/molecules/FormLogin.vue';
-  import TopContent from './components/molecules/TopContent.vue';
-  import TaskItem from './components/molecules/TaskItem.vue';
+  import MainContent from './components/MainContent.vue';
 </script>
 
 <template>
@@ -13,10 +11,7 @@
       <FormLogin />
     </header>
 
-    <main class="content">
-      <TopContent />
-      <TasksContent />
-    </main>
+    <MainContent />
   </div>
 </template>
 
@@ -55,18 +50,7 @@
     flex-direction: column;
     justify-content: center;
   }
-
   
-  
-
-  .content {
-    width: var(--width);
-    display: flex;
-    border-radius: var(--size24);
-    flex-direction: column;
-  }
-
-
   @media (min-width: 800px) {
     header {
       gap: 80px;
