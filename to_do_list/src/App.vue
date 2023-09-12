@@ -1,7 +1,8 @@
 <script setup lang="ts">
-  import BtnDel from './components/atomics/buttons/BtnDel.vue';
   import BtnAdd from './components/atomics/buttons/BtnAdd.vue';
   import BtnLogin from './components/atomics/buttons/BtnLogin.vue';
+  import FormInput from './components/atomics/inputs/FormInput.vue';
+  import TaskItem from './components/molecules/TaskItem.vue';
 </script>
 
 <template>
@@ -10,15 +11,8 @@
       <h1 class="title">Lista de Tarefas</h1>
 
       <form action="" class="form-login">
-        <div class="field">
-          <input type="text" name="cpf" required>
-          <label>CPF</label>
-        </div>
-        
-        <div class="field">
-          <input type="text" name="password" required>
-          <label>Senha</label>
-        </div>
+        <FormInput name="cpf" label="CPF" value="" />
+        <FormInput name="password" label="Password" value="" />
         <BtnLogin />
       </form>
     </header>
@@ -33,23 +27,7 @@
       </div>
 
       <div class="tasks">
-        <div class="task">
-          <div class="ctrl-input">
-            <input type="text" name="task_1" placeholder="TÍTULO">
-            <label>Pendente</label>
-
-            <div class="actions">
-              <div class="checked">
-                <input type="checkbox">
-                <span class="material-symbols-outlined">done</span>
-              </div>
-
-              <BtnDel />
-            </div>
-          </div>
-          
-          <textarea name="decription" id="" rows="10" placeholder="Decrição da tarefa"></textarea>
-        </div>
+        <TaskItem task_id="0" />
       </div>
     </main>
   </div>
@@ -91,38 +69,6 @@
     justify-content: center;
   }
 
-  header .form-login .field {
-    position: relative;
-    width: 100%;
-  }
-
-  header .form-login .field input {
-    width: 100%;
-    height: 48px;
-    padding: 12px;
-    border: none;
-    outline: none;
-    border-radius: 180px;
-    color: var(--secondary);
-    font-size: 14px;
-    background-color: var(--primary);
-  }
-
-  header .form-login .field label {
-    position: absolute;
-    top: 11px;
-    left: 12px;
-    color: var(--secondary);
-    transition: .75s all;
-  }
-
-  header .form-login .field input:focus~label,
-  header .form-login .field input:valid~label {
-    top: 1px;
-    left: 12px;
-    color: var(--error);
-    font-size: 12px;
-  }
   
   
 
@@ -172,109 +118,6 @@
     background-color: var(--bg-component);
   }
 
-  .content .tasks .task  {
-    width: 350px;
-    padding: 12px;
-    box-sizing: border-box;
-    border-radius: var(--size24);
-    display: flex;
-    gap: 16px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--bg-default);
-  }
-
-  .content .tasks .task .ctrl-input {
-    position: relative;
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-
-  .content .tasks .task .ctrl-input input[type="text"] {
-    width: 100%;
-    padding: 12px;
-    box-sizing: border-box;
-    border-radius: 180px;
-    color: var(--quaternary);
-    background-color: var(--bg-default);
-  }
-
-  .content .tasks .task .ctrl-input input[type="text"]:focus {
-    color: var(--secondary);
-    background-color: var(--primary);
-  }
-
-  .content .tasks .task .ctrl-input input[type="text"]:focus~label { transform: scale(0); }
-
-  .content .tasks .task .ctrl-input label {
-    position: absolute;
-    left: 12px;
-    bottom: -8px;
-    font-size: 14px;
-    transform: scale(1);
-    transition: .75s ease;
-  }
-
-  .content .tasks .task .ctrl-input .actions {
-    width: max-content;
-    display: flex;
-    gap: 16px;
-    align-items: center;
-  }
-
-  .content .tasks .task .ctrl-input .actions .checked {
-    position: relative;
-    width: 30px;
-    height: 30px;
-    transition: .75s all;
-    border-radius: 8px;
-    background-color: var(--ternary);
-  }
-
-.content .tasks .task .ctrl-input .actions .checked:hover {
-  background-color: #015C25;
-}
-
-  .content .tasks .task .ctrl-input .actions .checked input {
-    position: absolute;
-    opacity: 0;
-    z-index: 1;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    box-sizing: border-box;
-  }
-
-  .content .tasks .task .ctrl-input .actions .checked input:checked~span { animation: checked-enabled .4s ease-in-out; }
-
-  .content .tasks .task .ctrl-input .actions .checked span {
-    font-size: 30px;
-    animation: checked-disabled .4s ease-in-out forwards;
-  }
-
-  @keyframes checked-enabled {
-    0% { transform: scale(0); }
-    75% { transform: scale(1.5); }
-    100% { transform: scale(1); }
-  }
-
-  @keyframes checked-disabled {
-    0% { transform: scale(1); }
-    25% { transform: scale(1.5); }
-    100% { transform: scale(0); }
-  }
-
-  .content .tasks .task textarea {
-    width: 100%;
-    border: none;
-    outline: none;
-    background-color: var(--primary);
-    border-radius: 0 0 min(12px, 2.75vw) min(12px, 2.75vw);
-  }
 
   @media (min-width: 800px) {
     header {
