@@ -9,13 +9,13 @@ export const users: Array<User> = [
 		tasks: [
 			{
 				id: 0,
-				classDone: 'act',
+				act: true,
 				description: 'Testando o projeto',
 				title: 'Teste'
 			},
 			{
 				id: 1,
-				classDone: '',
+				act: false,
 				description: 'Testando',
 				title: 'Tarefa'
 			},
