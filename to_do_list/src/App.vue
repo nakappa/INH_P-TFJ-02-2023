@@ -1,6 +1,5 @@
 <script setup lang="ts">
-  import BtnLogin from './components/atomics/buttons/BtnLogin.vue';
-  import FormInput from './components/atomics/inputs/FormInput.vue';
+  import FormLogin from './components/molecules/FormLogin.vue';
   import TaskItem from './components/molecules/TaskItem.vue';
   import TopContent from './components/molecules/TopContent.vue';
 </script>
@@ -10,11 +9,7 @@
     <header class="header">
       <h1 class="title">Lista de Tarefas</h1>
 
-      <form action="" class="form-login">
-        <FormInput name="cpf" label="CPF" value="" />
-        <FormInput name="password" label="Password" value="" />
-        <BtnLogin />
-      </form>
+      <FormLogin />
     </header>
 
     <main class="content">
