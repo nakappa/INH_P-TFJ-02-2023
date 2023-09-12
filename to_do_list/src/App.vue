@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import BtnAdd from './components/atomics/buttons/BtnAdd.vue';
   import BtnLogin from './components/atomics/buttons/BtnLogin.vue';
   import FormInput from './components/atomics/inputs/FormInput.vue';
   import TaskItem from './components/molecules/TaskItem.vue';
+  import TopContent from './components/molecules/TopContent.vue';
 </script>
 
 <template>
@@ -18,14 +18,7 @@
     </header>
 
     <main class="content">
-      <div class="top">
-        <h2 class="title">Minhas Tarefas</h2>
-        <div class="content-add">
-          <h3 class="title">adicionar</h3>
-          <BtnAdd />
-        </div>
-      </div>
-
+      <TopContent />
       <div class="tasks">
         <TaskItem task_id="0" />
       </div>
@@ -79,32 +72,6 @@
     flex-direction: column;
   }
 
-  .content .top {
-    width: 100%;
-    padding: var(--size24);
-    display: flex;
-    gap: 24px;
-    align-items: center;
-    justify-content: space-between;
-    color: var(--secondary);
-    border-radius: var(--size24) var(--size24) 0 0;
-    background-color: var(--quaternary);
-  }
-
-  .content .top .title {
-    font-size: var(--size24);
-    font-weight: 700;
-  }
-  
-  .content .top h2.title { font-size: 32px; }
-  .content .top h3.title { font-size: 24px; }
-
-  .content .top .content-add {
-    width: max-content;
-    display: flex;
-    gap: 16px;
-    align-items: center;
-  }
 
 
   .content .tasks  {
