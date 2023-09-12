@@ -11,7 +11,12 @@
 </template>
 
 <style scoped>
-  input {
+  .field {
+    position: relative;
+    width: 100%;
+  }
+
+  .field input {
     width: 100%;
     height: 48px;
     padding: 12px;
@@ -23,7 +28,7 @@
     background-color: var(--primary);
   }
 
-  label {
+  .field label {
     position: absolute;
     top: 11px;
     left: 12px;
@@ -31,11 +36,19 @@
     transition: .75s all;
   }
 
-  input:focus~label,
-  input:valid~label {
+  .field input:focus~label,
+  .field input:valid~label {
     top: 1px;
     left: 12px;
     color: var(--error);
     font-size: 12px;
+  }
+
+  @media (min-width: 800px) {
+    .field {
+      min-width: 210px;
+      flex-direction: row;
+      align-items: center;
+    }
   }
 </style>

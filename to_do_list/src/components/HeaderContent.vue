@@ -10,6 +10,11 @@
 </template>
 
 <style scoped>
+  h1.title {
+    font-size: var(--size48);
+    color: var(--quaternary);
+  }
+
   header {
     width: 100%;
     display: flex;

@@ -12,8 +12,31 @@
 </template>
 
 <style scoped>
-  .field {
-    position: relative;
-    width: 100%;
+  .form-login {
+    width: 210px;
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .form-login .btn { margin-top: 12px; }
+
+  @media (min-width: 800px) {
+    .form-login {
+      width: min(600px, 100%);
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .form-login .field {
+      min-width: 210px;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .form-login .btn {
+      margin-top: 0;
+      height: 48px;
+    }
   }
 </style>

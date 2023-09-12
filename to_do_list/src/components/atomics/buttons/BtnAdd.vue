@@ -9,12 +9,12 @@
 
 <style scoped>
   .add {
-    width: 48px;
-    height: 48px;
+    width: var(--size48);
+    height: var(--size48);
     border-radius: 50%;
     transition: .75s all;
     color: var(--quaternary);
-  background-color: var(--secondary);
+    background-color: var(--secondary);
   }
 
   .add:hover {
@@ -24,7 +24,7 @@
   }
 
   .add span {
-    font-size: 32px;
+    font-size: var(--size32);
     font-weight: 500;
     transition: .75s all;
   }

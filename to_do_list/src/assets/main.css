@@ -13,8 +13,9 @@
 
   --width: min(1200px, 100%);
   --mt: min(60px, 13vw);
-  --size48: min(48px, 11vw);
   --size24: min(24px, 5.5vw);
+  --size32: min(32px, 8.25vw);
+  --size48: min(48px, 11vw);
 }
 
 body {
@@ -47,6 +48,8 @@ input {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
+
+.title { font-weight: 700; }
 
 .btn {
   border: none;

@@ -21,11 +21,4 @@
     flex-direction: column;
     align-items: center;
   }
-  
-  .title { font-weight: 700; }
-
-  h1.title {
-    font-size: var(--size48);
-    color: var(--quaternary);
-  }
 </style>

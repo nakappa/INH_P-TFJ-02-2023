@@ -18,21 +18,18 @@
     padding: var(--size24);
     display: flex;
     gap: 24px;
+		flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     color: var(--secondary);
     border-radius: var(--size24) var(--size24) 0 0;
     background-color: var(--quaternary);
   }
   
-	.top .title {
-    font-size: var(--size24);
-    font-weight: 700;
-  }
+	.top .title { font-weight: 700; }
+	.top h2.title { font-size: var(--size32); }
   
-	.top h2.title { font-size: 32px; }
-  
-	.top h3.title { font-size: 24px; }
+	.top h3.title { font-size: var(--size24); }
   
 	.top .content-add {
     width: max-content;
@@ -40,4 +37,8 @@
     gap: 16px;
     align-items: center;
   }
-</style>t
+
+	@media (min-width: 525px) {
+		.top { justify-content: space-between; }
+	}
+</style>
