@@ -1,7 +1,8 @@
 <script setup lang="ts">
+  import TasksContent from './components/materials/TasksContent.vue';
   import FormLogin from './components/molecules/FormLogin.vue';
-  import TaskItem from './components/molecules/TaskItem.vue';
   import TopContent from './components/molecules/TopContent.vue';
+  import TaskItem from './components/molecules/TaskItem.vue';
 </script>
 
 <template>
@@ -14,9 +15,7 @@
 
     <main class="content">
       <TopContent />
-      <div class="tasks">
-        <TaskItem task_id="0" />
-      </div>
+      <TasksContent />
     </main>
   </div>
 </template>
@@ -65,19 +64,6 @@
     display: flex;
     border-radius: var(--size24);
     flex-direction: column;
-  }
-
-
-
-  .content .tasks  {
-    width: 100%;
-    padding: var(--size24);
-    box-sizing: border-box;
-    border-radius: 0 0 var(--size24) var(--size24);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--bg-component);
   }
 
 
