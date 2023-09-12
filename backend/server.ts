@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import { users } from './data/Users';
 
 const app = express(),
       port = 8080,
@@ -9,8 +10,8 @@ app.use(express.json());
 // app.use(cors());
 
 //@ts-ignore
-app.get('/', (req, res) => {
-  return res.json('Testando a api');
+app.get('/users', (req, res) => {
+  return res.json(users);
 });
 
 //@ts-ignore
