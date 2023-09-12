@@ -1,4 +1,7 @@
 <script setup lang="ts">
+  import BtnDel from './components/atomics/buttons/BtnDel.vue';
+  import BtnAdd from './components/atomics/buttons/BtnAdd.vue';
+  import BtnLogin from './components/atomics/buttons/BtnLogin.vue';
 </script>
 
 <template>
@@ -16,10 +19,7 @@
           <input type="text" name="password" required>
           <label>Senha</label>
         </div>
-        <button class="btn submit">
-          Login
-          <span class="material-symbols-outlined">login</span>
-        </button>
+        <BtnLogin />
       </form>
     </header>
 
@@ -28,9 +28,7 @@
         <h2 class="title">Minhas Tarefas</h2>
         <div class="content-add">
           <h3 class="title">adicionar</h3>
-          <button class="btn add">
-            <span class="material-symbols-outlined">add</span>
-          </button>
+          <BtnAdd />
         </div>
       </div>
 
@@ -46,9 +44,7 @@
                 <span class="material-symbols-outlined">done</span>
               </div>
 
-              <button class="btn del">
-                <span class="material-symbols-outlined">delete</span>
-              </button>
+              <BtnDel />
             </div>
           </div>
           
@@ -128,23 +124,7 @@
     font-size: 12px;
   }
   
-  header .form-login .submit {
-    gap: 10px;
-    width: 100%;
-    height: 36px;
-    border-radius: 180px;
-    font-size: 16px;
-    font-weight: 500;
-    transition: .75s all;
-    background-color: var(--quaternary);
-  }
   
-  header .form-login .submit:hover {
-    box-shadow: 0 0 5px var(--quaternary),
-                0 0 10px var(--quaternary),
-                0 0 15px var(--quaternary),
-                0 0 20px var(--quaternary);
-  }
 
   .content {
     width: var(--width);
@@ -180,26 +160,6 @@
     align-items: center;
   }
 
-  .content .top .content-add .add {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    transition: .75s all;
-    color: var(--quaternary);
-    background-color: var(--secondary);
-  }
-
-  .content .top .content-add .add:hover {
-    box-shadow: 0 0 5px var(--secondary),
-                0 0 10px var(--secondary),
-                0 0 15px var(--secondary);
-  }
-
-  .content .top .content-add .add span {
-    font-size: 32px;
-    font-weight: 500;
-    transition: .75s all;
-  }
 
   .content .tasks  {
     width: 100%;
@@ -308,21 +268,6 @@
     100% { transform: scale(0); }
   }
 
-  .content .tasks .task .ctrl-input .actions .del {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    transition: .75s all;
-    color: var(--primary);
-    background-color: var(--error);
-  }
-
-  .content .tasks .task .ctrl-input .actions .del:hover {
-    box-shadow: 0 0 5px var(--error),
-                0 0 10px var(--error),
-                0 0 15px var(--error);
-  }
-
   .content .tasks .task textarea {
     width: 100%;
     border: none;
@@ -350,7 +295,7 @@
       align-items: center;
     }
 
-    header .form-login .submit { height: 48px; }
+    header .form-login .btn { height: 48px; }
   }
 
   @media (min-width: 800px) and (max-width: 1085px) {
