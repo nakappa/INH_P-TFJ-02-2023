@@ -30,19 +30,45 @@ app.put('/users/update', (req, res) => {
         user: User = users.filter(item => item.cpf == req.body.cpf)[0];
         
   if (user) {
-    user.tasks.push(req.body.tasks);
+    user.tasks.push(req.body.task)
     
     return res.json({
       status: !status,
-      user: user,
       msg: 'Usuário atualizado com sucesso'
     });
   }
 
   return res.json({ 
+    status: status,
+    msg: 'Não foi possível atualizar o usuário'
+  });
+});
+
+//@ts-ignore
+app.delete('/users/delete', (req, res) => {
+  const status: boolean = false,
+        user: User = users.filter(item => item.cpf == req.body.cpf)[0];
+
+        console.log(req.body)
+        
+  if (user) {
+    for (let i: number = 0; i < user.tasks.length; i++)
+      if (req.body.task_id == user.tasks[i].id) {
+        user.tasks?.splice(i, 1);
+        break;
+      }
+    
+      return res.json({ 
+        status: !status, 
+        user: user, 
+        msg: 'Tarefa removida com sucesso'
+      });
+  }
+
+  return res.json({ 
     status: status, 
     user: user, 
-    msg: 'Não foi possível atualizar o usuário'
+    msg: 'Não foi possível remover a tarefa'
   });
 });
 

@@ -1,9 +1,12 @@
 <script setup lang="ts">
-  
+  import type { User } from '@/types/Users';
+  import { del } from '@/utils/actions';
+
+  defineProps<{ task_id: number, user: User }>();  
 </script>
 
 <template>
-  <button class="btn del" @click="console.log('del')">
+  <button class="btn del" @click="del(task_id, user)">
     <span class="material-symbols-outlined">delete</span>
   </button>
 </template>

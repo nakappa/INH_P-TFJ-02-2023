@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { reactive, ref } from 'vue';
+  import { reactive } from 'vue';
   import { noUser, type User } from './types/Users';
   import HeaderContent from './components/HeaderContent.vue';
   import MainContent from './components/MainContent.vue';

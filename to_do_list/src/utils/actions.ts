@@ -42,28 +42,49 @@ export function logout(user: User) {
 }
 
 export async function add(user: User) {
+  if (!user.tasks) user.tasks = [];
+
   const { tasks } = user,
-        pos = user.tasks.length - 1,
+        pos = tasks?.length - 1 || 0,
         
-        fieldTasks: Array<Task> = [
-          {
-            id: tasks[pos].id + 1,
-            act: false,
-            description: 'Descrição da tarefa',
-            title: 'Título'
-          }
-        ],
+        fieldTask: Task = {
+          id: tasks[pos]?.id + 1 || 0,
+          act: false,
+          description: 'Descrição da tarefa',
+          title: 'Título'
+        },
 
         fields = JSON.stringify({
           cpf: user.cpf,
-          tasks: fieldTasks
+          task: fieldTask
         });
 
   await fetch(`${baseURL}/users/update`, config('put', fields))
     .then(res => res.ok && res.json())
     .then(res => {
-      //@ts-ignore
-      for (const field in user) user[field] = res.user[field];
+      res.status && tasks.push(fieldTask);
+      console.log(user.tasks.length)
+      sessionStorage.setItem('user', JSON.stringify(user));
+    });
+}
+
+export async function del(task_id:number, user: User) {
+  const { tasks } = user,
+        fields = JSON.stringify({
+          task_id: task_id,
+          cpf: user.cpf
+        });
+
+  await fetch(`${baseURL}/users/delete`, config('delete', fields))
+    .then(res => res.ok && res.json())
+    .then(res => {
+      console.log(res.status)
+        for (let i: number = 0; i < tasks.length; i++)
+          if (task_id == tasks[i].id) {
+            tasks?.splice(i, 1);
+            break;
+          }
+          
       sessionStorage.setItem('user', JSON.stringify(user));
     });
 }

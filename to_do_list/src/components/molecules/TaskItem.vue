@@ -15,10 +15,10 @@ defineProps<{ task_id: number; user: User }>();
 
       <div class="actions">
         <CheckBox />
-        <BtnDel />
+        <BtnDel :task_id="task_id" :user="user"/>
       </div>
     </div>
-
+    
     <TextArea name="description" desc="Descrição da tarefa" />
   </li>
 </template>
