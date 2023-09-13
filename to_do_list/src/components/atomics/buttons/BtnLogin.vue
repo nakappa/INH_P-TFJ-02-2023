@@ -6,7 +6,7 @@
 </script>
 
 <template>
-  <button type="button" class="btn login" @click="login(values, user)">
+  <button type="submit" class="btn login" @click="login(values, user)">
     login
     <span class="material-symbols-outlined">login</span>
   </button>

@@ -1,20 +1,25 @@
 <script setup lang="ts">
-  import { ref, watch } from 'vue';
+  import { onMounted, watch } from 'vue';
   import type { User } from '@/types/Users';
   import { add } from '@/utils/actions';
 
-  const props = defineProps<{ user: User }>(),
-        logged = ref<boolean>(false);
+  const props = defineProps<{ user: User }>();
 
-  watch(props, () =>
+  function disabled() {
+    const btn = document.querySelector('.add') as HTMLElement;
     props.user.id < 0
-      ? logged.value = false
-      : logged.value = true
-  );
+      ? btn.setAttribute('disabled', '')
+      : btn.removeAttribute('disabled');
+  }
+
+  watch(props, disabled);
+  onMounted(disabled)
+
+  console.log(props.user.id)
 </script>
 
 <template>
-  <button class="btn add" @click="logged && add(user)">
+  <button class="btn add" @click="add(user)">
     <span class="material-symbols-outlined">add</span>
   </button>
 </template>
@@ -39,5 +44,10 @@
     font-size: var(--size32);
     font-weight: 500;
     transition: .75s all;
+  }
+
+  .add:disabled {
+    pointer-events: none;
+    background-color: var(--bg-component);
   }
 </style>

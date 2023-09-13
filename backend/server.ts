@@ -25,6 +25,28 @@ app.post('/users/validate', (req, res) => {
 });
 
 //@ts-ignore
+app.put('/users/update', (req, res) => {
+  const status: boolean = false,
+        user: User = users.filter(item => item.cpf == req.body.cpf)[0];
+        
+  if (user) {
+    user.tasks.push(req.body.tasks);
+    
+    return res.json({
+      status: !status,
+      user: user,
+      msg: 'Usuário atualizado com sucesso'
+    });
+  }
+
+  return res.json({ 
+    status: status, 
+    user: user, 
+    msg: 'Não foi possível atualizar o usuário'
+  });
+});
+
+//@ts-ignore
 app.listen(port, (req, res) => {
   console.log(`Servidor rodando com sucesso: ${hostname}:${port}`)
 });
