@@ -1,8 +1,12 @@
 <script setup lang="ts">
+  import type { User } from '@/types/Users';
+  import { add } from '@/utils/actions';
+
+  defineProps<{ logged: boolean, user: User }>();
 </script>
 
 <template>
-  <button class="btn add" @click="console.log('add')">
+  <button class="btn add" @click="logged && add(user)">
     <span class="material-symbols-outlined">add</span>
   </button>
 </template>
