@@ -2,7 +2,7 @@
   import type { User } from '@/types/Users';
   import BtnAdd from '../atomics/buttons/BtnAdd.vue';
 
-  defineProps<{ logged: boolean, user: User }>();
+  defineProps<{ user: User }>();
 </script>
 
 <template>
@@ -10,7 +10,7 @@
     <h2 class="title">Minhas Tarefas</h2>
     <div class="content-add">
       <h3 class="title">adicionar</h3>
-      <BtnAdd :logged="logged" :user="user" />
+      <BtnAdd :user="user" />
     </div>
   </div>
 </template>

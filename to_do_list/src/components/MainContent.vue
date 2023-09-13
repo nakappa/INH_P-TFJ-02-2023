@@ -3,12 +3,12 @@
 	import TopContent from './molecules/TopContent.vue';
 	import TasksContent from './materials/TasksContent.vue';
 
-  defineProps<{ logged: boolean, user: User }>();
+  defineProps<{ user: User }>();
 </script>
 
 <template>
 	<main class="content">
-		<TopContent :logged="logged" :user="user" />
+		<TopContent :user="user" />
 		<TasksContent :user="user" />
 	</main>
 </template>

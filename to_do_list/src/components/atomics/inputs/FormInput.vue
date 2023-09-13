@@ -1,19 +1,11 @@
 <!-- eslint-disable vue/no-mutating-props -->
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { ref, watch } from 'vue';
 
-  const props = defineProps<{ name: string, label: string, values: FormData }>();
-  let value = '';
-
-  onMounted(() => {
-    const inputElement = document.querySelector(`input[name="${props.name}"]`) as HTMLElement;
-
-    props.values.append(`${props.name}`, '');
-
-    //@ts-ignore
-    inputElement?.addEventListener('blur', () => props.values.set(`${props.name}`, inputElement.value));
-    
-  });
+  const props = defineProps<{ name: string, label: string, values: any }>(),
+        value = ref<string>('');
+  
+  watch(value, ()=> props.values[props.name] = value.value);
 </script>
 
 <template>

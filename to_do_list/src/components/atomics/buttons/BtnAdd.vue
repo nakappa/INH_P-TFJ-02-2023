@@ -1,8 +1,16 @@
 <script setup lang="ts">
+  import { ref, watch } from 'vue';
   import type { User } from '@/types/Users';
   import { add } from '@/utils/actions';
 
-  defineProps<{ logged: boolean, user: User }>();
+  const props = defineProps<{ user: User }>(),
+        logged = ref<boolean>(false);
+
+  watch(props, () =>
+    props.user.id < 0
+      ? logged.value = false
+      : logged.value = true
+  );
 </script>
 
 <template>

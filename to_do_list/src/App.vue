@@ -1,26 +1,10 @@
 <script setup lang="ts">
   import { reactive, ref } from 'vue';
-  import type { User } from './types/Users';
+  import { noUser, type User } from './types/Users';
   import HeaderContent from './components/HeaderContent.vue';
   import MainContent from './components/MainContent.vue';
-  
   //@ts-ignore
-  const logged = ref(JSON.parse(sessionStorage.getItem(logged)) || false),
-  //@ts-ignore
-        user = reactive<User>(JSON?.parse(sessionStorage.getItem('user')) || {
-    id: -1,
-    name: '',
-    cpf: 0,
-    password: 'string',
-    tasks: [
-      {
-        id: -1,
-        act: false,
-        description: 'teste',
-        title: 'Teste'
-      }
-    ]
-  });
+  const user = reactive<User>(JSON.parse(sessionStorage.getItem('user')) || noUser);
 </script>
 
 <template>

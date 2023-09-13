@@ -1,11 +1,12 @@
 <script setup lang="ts">
   import type { User } from '@/types/Users';
+  import { logout } from '@/utils/actions';
 
   defineProps<{ user:User }>();
 </script>
 
 <template>
-  <button type="button" class="btn logout" @click="console.log('sair')">
+  <button type="button" class="btn logout" @click="logout(user)">
     sair
     <span class="material-symbols-outlined">logout</span>
   </button>

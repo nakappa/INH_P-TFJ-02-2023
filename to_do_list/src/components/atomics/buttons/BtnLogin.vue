@@ -2,7 +2,7 @@
   import type { User } from '@/types/Users';
   import { login } from '@/utils/actions';
 
-  defineProps<{ values: FormData, user:User }>();
+  defineProps<{ user:User, values: any }>();
 </script>
 
 <template>

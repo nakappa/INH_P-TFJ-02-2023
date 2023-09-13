@@ -1,10 +1,11 @@
-import type { User } from "@/types/Users";
+import { noUser, type User } from "@/types/Users";
 import { baseURL } from "./service";
 
-export async function login(values: FormData, user: User) {
+export async function login(values: any, user: User) {
+  console.log(values)
   const fields = JSON.stringify({
-    cpf: values.get('cpf'),
-    password: values.get('password')
+    cpf: values.cpf,
+    password: values.password
   }),
 
   config = {
@@ -16,25 +17,26 @@ export async function login(values: FormData, user: User) {
   await fetch(`${baseURL}/users/validate`, config)
     .then(res => res.ok && res.json())
     .then(res => {
-      //@ts-ignore
       sessionStorage.setItem('logged', res.status);
 
       if (res.status) {
         //@ts-ignore
         sessionStorage.setItem('user', JSON.stringify(res.user));
         //@ts-ignore
-        for (const field in res.user) user[field] = res.user[field];
+        for (const field in user) user[field] = res.user[field];
 
       } else {
         sessionStorage?.removeItem('user');
-        
-        user.id = -1;
-        user.cpf = 0;
-        user.name = '';
-        user.password = '';
-        user.tasks = [];
+        //@ts-ignore
+        for (const field in user) user[field] = noUser[field];
       }
     });
+}
+
+export function logout( user: User) {
+  //@ts-ignore
+  for (const field in user) user[field] = noUser[field];
+  sessionStorage.clear();
 }
 
 export function add(user: User) {
