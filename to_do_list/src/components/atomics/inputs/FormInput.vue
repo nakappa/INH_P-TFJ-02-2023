@@ -1,11 +1,29 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <script setup lang="ts">
-  const props = defineProps<{ name: string, label: string, value: string }>();
-  let { name, label, value } = props;
+import { onMounted } from 'vue';
+
+  const props = defineProps<{ name: string, label: string, values: FormData }>();
+  let value = '';
+
+  onMounted(() => {
+    const inputElement = document.querySelector(`input[name="${props.name}"]`) as HTMLElement;
+
+    props.values.append(`${props.name}`, '');
+
+    //@ts-ignore
+    inputElement?.addEventListener('blur', () => props.values.set(`${props.name}`, inputElement.value));
+    
+  });
 </script>
 
 <template>
   <div class="field">
-    <input type="text" :name="name" v-model="value" required>
+    <input
+      type="text" :name="name"
+      v-model="value"
+      required
+    >
+
     <label>{{ label }}</label>
   </div>
 </template>

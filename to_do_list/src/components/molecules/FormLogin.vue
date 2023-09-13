@@ -1,13 +1,17 @@
 <script setup lang="ts">
-	import BtnLogin from '../atomics/buttons/BtnLogin.vue';
+	import type { User } from '@/types/Users';
+  import BtnLogin from '../atomics/buttons/BtnLogin.vue';
 	import FormInput from '../atomics/inputs/FormInput.vue';
+
+  defineProps<{ user: User }>();
+  const values = new FormData();
 </script>
 
 <template>
 	<form action="" class="form-login">
-		<FormInput name="cpf" label="CPF" value="" />
-		<FormInput name="password" label="Password" value="" />
-		<BtnLogin />
+		<FormInput name="cpf" label="CPF" :values="values" />
+		<FormInput name="password" label="Password" :values="values" />
+		<BtnLogin :user="user" :values="values"/>
 	</form>
 </template>
 

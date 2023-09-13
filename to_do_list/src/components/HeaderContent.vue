@@ -1,11 +1,14 @@
 <script setup lang="ts">
-	import FormLogin from './molecules/FormLogin.vue';
+	import type { User } from '@/types/Users';
+  import FormLogin from './molecules/FormLogin.vue';
+
+  defineProps<{ user: User}>();
 </script>
 
 <template>
 	<header class="header">
 		<h1 class="title">Lista de Tarefas</h1>
-		<FormLogin />
+		<FormLogin :user="user" />
 	</header>
 </template>
 
