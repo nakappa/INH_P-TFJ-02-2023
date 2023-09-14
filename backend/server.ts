@@ -26,22 +26,33 @@ app.post('/users/validate', (req, res) => {
 
 //@ts-ignore
 app.put('/users/update', (req, res) => {
-  const status: boolean = false,
+  const requestType = req.body.requestType,
+        status: boolean = false,
         user: User = users.filter(item => item.cpf == req.body.cpf)[0];
         
   if (user) {
-    user.tasks.push(req.body.task)
+    if (requestType == 'add') user.tasks.push(req.body.task);
+
+    else if (requestType == 'change-task') {
+      for (let i: number = 0; i < user.tasks.length; i++) {
+        if (req.body.task_id == user.tasks[i].id) {
+          user.tasks[i].act = true
+          break;
+        }
+      }
+    };
     
-    return res.json({
-      status: !status,
-      msg: 'Usuário atualizado com sucesso'
-    });
+    return returnREQ(!status, 'Atualização realizada com sucesso!!!');
   }
 
-  return res.json({ 
-    status: status,
-    msg: 'Não foi possível atualizar o usuário'
-  });
+  return returnREQ(status, 'Houve um erro, tente novamente mais tarde!!!');
+
+  function returnREQ(status: boolean, msg: string) {
+    return res.json({
+      status: status,
+      msg: msg
+    });
+  }
 });
 
 //@ts-ignore

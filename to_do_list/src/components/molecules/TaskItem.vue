@@ -14,7 +14,7 @@ defineProps<{ task_id: number; user: User }>();
       <TaskInput :name="`input_task_${task_id}`" title="TÍTULO" />
 
       <div class="actions">
-        <CheckBox />
+        <CheckBox :task_id="task_id" :user="user" />
         <BtnDel :task_id="task_id" :user="user"/>
       </div>
     </div>
@@ -34,6 +34,7 @@ defineProps<{ task_id: number; user: User }>();
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: .75s all;
     background-color: var(--bg-default);
   }
 
@@ -59,5 +60,10 @@ defineProps<{ task_id: number; user: User }>();
     outline: none;
     background-color: var(--primary);
     border-radius: 0 0 min(12px, 2.75vw) min(12px, 2.75vw);
+  }
+
+  .task.act {
+    color: var(--secondary);
+    background-color: var(--quaternary);
   }
 </style>

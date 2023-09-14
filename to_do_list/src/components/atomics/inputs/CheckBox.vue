@@ -1,10 +1,32 @@
 <script setup lang="ts">
-  let checked: boolean = false
+  import { onMounted, ref, watch } from 'vue';
+  import type { User } from '@/types/Users';
+  import { change } from '@/utils/actions'
+
+  const props = defineProps<{ task_id: number, user: User }>(),
+        { task_id , user } = props;
+
+  let checked = ref<boolean>(user.tasks.filter(item => item.id == task_id)[0].act);
+
+  function handleCheck() {
+    const task = document.querySelector(`[name="task_${task_id}"]`) as HTMLElement;
+
+    checked.value
+      ? task.classList.add('act')
+      : task.classList.remove('act');
+  }
+    
+  watch(checked, () => {
+    handleCheck();
+    change(task_id, user, 'change-task');
+  });
+
+  onMounted(handleCheck)
 </script>
 
 <template>
   <div class="check-box">
-    <input type="checkbox" @click="checked = !checked; console.log(checked)">
+    <input type="checkbox" v-model="checked">
     <span class="material-symbols-outlined">done</span>
   </div>
 </template>

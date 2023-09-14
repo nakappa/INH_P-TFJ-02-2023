@@ -11,6 +11,7 @@ import TaskItem from '../molecules/TaskItem.vue';
       v-for="task in user.tasks"
       :key="task.id"
       :id="`${task.id}`"
+      :name="`task_${task.id}`"
       :task_id="task.id"
       :user="user"
     />

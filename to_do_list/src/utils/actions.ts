@@ -2,13 +2,14 @@ import { noUser, type User } from "@/types/Users";
 import { baseURL } from "./service";
 import type { Task } from "@/types/Task";
 
+let msg: string;
 const config = (method: string, body: any) => {
   return {
     method: method.toUpperCase(),
     body: body,
     headers: { "Content-type": "application/json" }
   }
-}
+};
 
 export async function login(values: any, user: User) {
   const fields = JSON.stringify({
@@ -55,6 +56,7 @@ export async function add(user: User) {
         },
 
         fields = JSON.stringify({
+          requestType: 'add',
           cpf: user.cpf,
           task: fieldTask
         });
@@ -62,8 +64,8 @@ export async function add(user: User) {
   await fetch(`${baseURL}/users/update`, config('put', fields))
     .then(res => res.ok && res.json())
     .then(res => {
+      msg = res.msg;
       res.status && tasks.push(fieldTask);
-      console.log(user.tasks.length)
       sessionStorage.setItem('user', JSON.stringify(user));
     });
 }
@@ -71,20 +73,45 @@ export async function add(user: User) {
 export async function del(task_id:number, user: User) {
   const { tasks } = user,
         fields = JSON.stringify({
-          task_id: task_id,
-          cpf: user.cpf
+          cpf: user.cpf,
+          task_id: task_id
         });
 
   await fetch(`${baseURL}/users/delete`, config('delete', fields))
     .then(res => res.ok && res.json())
     .then(res => {
-      console.log(res.status)
+      if (res.status)
         for (let i: number = 0; i < tasks.length; i++)
           if (task_id == tasks[i].id) {
             tasks?.splice(i, 1);
             break;
           }
           
+      msg = res.msg;
       sessionStorage.setItem('user', JSON.stringify(user));
     });
+}
+
+export async function change(task_id:number, user: User, requestType: string) {
+  const { tasks } = user,
+        fields = JSON.stringify({
+          requestType: requestType,
+          cpf: user.cpf,
+          task_id: task_id
+        });
+
+  await fetch(`${baseURL}/users/update`, config('put', fields))
+    .then(res => res.ok && res.json())
+    .then(res => {
+      if (res.status)
+        for (let i: number = 0; i < tasks.length; i++)
+          if (task_id == tasks[i].id) {
+            if (requestType == 'change-task') tasks[i].act = true;
+            break;
+          }
+          
+    });
+  
+  sessionStorage.setItem('user', JSON.stringify(user));
+  console.log(tasks)
 }
