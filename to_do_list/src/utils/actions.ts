@@ -92,12 +92,14 @@ export async function del(task_id:number, user: User) {
     });
 }
 
-export async function change(task_id:number, user: User, requestType: string) {
+export async function change( requestType: string, task_id:number, user: User, value: any) {
   const { tasks } = user,
+  
         fields = JSON.stringify({
           requestType: requestType,
           cpf: user.cpf,
-          task_id: task_id
+          task_id: task_id,
+          value: value
         });
 
   await fetch(`${baseURL}/users/update`, config('put', fields))
@@ -106,12 +108,12 @@ export async function change(task_id:number, user: User, requestType: string) {
       if (res.status)
         for (let i: number = 0; i < tasks.length; i++)
           if (task_id == tasks[i].id) {
-            if (requestType == 'change-task') tasks[i].act = true;
+            if (requestType == 'change-task') tasks[i].act = value;
+            if (requestType == 'change-title') tasks[i].title = value;
             break;
           }
           
     });
   
   sessionStorage.setItem('user', JSON.stringify(user));
-  console.log(tasks)
 }

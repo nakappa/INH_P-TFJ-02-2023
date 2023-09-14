@@ -1,11 +1,21 @@
 <script setup lang="ts">
-  const props = defineProps<{ name: string, title: string }>();
-  let { title } = props;
+  import { ref } from 'vue';
+  import type { User } from '@/types/Users';
+  import { change } from '@/utils/actions';
+
+  const props = defineProps<{ task_id: number, user: User }>(),
+        { task_id, user } = props,
+        title = ref<string>(user.tasks.filter(item => item.id == task_id)[0].title);
 </script>
 
 <template>
   <div class="task-input">
-		<input type="text" :name="name" v-model="title" @keyup="console.log(title)">
+		<input
+      type="text"
+      :name="`input_task_${task_id}`"
+      v-model="title"
+      v-on:blur="change('change-title', task_id, user, title)"
+    >
 		<label>Pendente</label>
   </div>
 </template>
@@ -21,6 +31,9 @@
     padding: 12px;
     box-sizing: border-box;
     border-radius: 180px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: .75s all;
     color: var(--quaternary);
     background-color: var(--bg-default);
   }
@@ -40,4 +53,11 @@
     transform: scale(1);
     transition: .75s ease;
   }
+
+  .task.act .ctrl-input .task-input input[type="text"] {
+    color: var(--secondary);
+    background-color: var(--quaternary);
+  }
+
+  .task.act .ctrl-input .task-input input[type="text"]:focus { background-color: var(--primary); }
 </style>

@@ -9,16 +9,22 @@
   let checked = ref<boolean>(user.tasks.filter(item => item.id == task_id)[0].act);
 
   function handleCheck() {
-    const task = document.querySelector(`[name="task_${task_id}"]`) as HTMLElement;
+    const task = document.querySelector(`[name="task_${task_id}"]`) as HTMLElement,
+          label = task.children[0].children[0].children[1];
 
-    checked.value
-      ? task.classList.add('act')
-      : task.classList.remove('act');
+    if (checked.value) {
+      task.classList.add('act');
+      label.innerHTML = 'Concluído';
+
+    } else {
+      task.classList.remove('act');
+      label.innerHTML = 'Pendente';
+    }
   }
     
   watch(checked, () => {
     handleCheck();
-    change(task_id, user, 'change-task');
+    change('change-task', task_id, user, checked.value);
   });
 
   onMounted(handleCheck)

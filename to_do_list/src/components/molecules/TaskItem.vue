@@ -11,7 +11,7 @@ defineProps<{ task_id: number; user: User }>();
 <template>
   <li class="task" name="name">
     <div class="ctrl-input">
-      <TaskInput :name="`input_task_${task_id}`" title="TÍTULO" />
+      <TaskInput :task_id="task_id" :user="user" />
 
       <div class="actions">
         <CheckBox :task_id="task_id" :user="user" />

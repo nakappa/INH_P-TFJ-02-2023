@@ -36,7 +36,7 @@ app.put('/users/update', (req, res) => {
     else if (requestType == 'change-task') {
       for (let i: number = 0; i < user.tasks.length; i++) {
         if (req.body.task_id == user.tasks[i].id) {
-          user.tasks[i].act = true
+          user.tasks[i].act = req.body.value;
           break;
         }
       }
