@@ -1,10 +1,21 @@
 <script setup lang="ts">
-  const props = defineProps<{ name: string, desc: string }>();
-	let { desc } = props;
+  import { ref } from 'vue';
+  import type { User } from '@/types/Users';
+  import { change } from '@/utils/actions';
+
+  const props = defineProps<{ task_id: number, user: User }>(),
+        { task_id, user } = props,
+        description = ref<string>(user.tasks.filter(item => item.id == task_id)[0].description)
 </script>
 
 <template>
-	<textarea :name="name" rows="10" v-model="desc" @keyup="console.log(desc)"></textarea>
+	<textarea
+    :name="`text_task_${task_id}`"
+    rows="10"
+    v-model="description"
+    v-on:blur="change('change-description', task_id, user, description)"
+  >
+  </textarea>
 </template>
 
 <style scoped>

@@ -32,15 +32,9 @@ app.put('/users/update', (req, res) => {
         
   if (user) {
     if (requestType == 'add') user.tasks.push(req.body.task);
-
-    else if (requestType == 'change-task') {
-      for (let i: number = 0; i < user.tasks.length; i++) {
-        if (req.body.task_id == user.tasks[i].id) {
-          user.tasks[i].act = req.body.value;
-          break;
-        }
-      }
-    };
+    else if (requestType == 'change-task') changeValueUser('act', req.body.value);
+    else if (requestType == 'change-title') changeValueUser('title', req.body.value);
+    else if (requestType == 'change-description') changeValueUser('description', req.body.value);
     
     return returnREQ(!status, 'Atualização realizada com sucesso!!!');
   }
@@ -52,6 +46,16 @@ app.put('/users/update', (req, res) => {
       status: status,
       msg: msg
     });
+  }
+
+  function changeValueUser(field: string, value: any) {
+    for (let i: number = 0; i < user.tasks.length; i++) {
+      if (req.body.task_id == user.tasks[i].id) {
+        //@ts-ignore
+        user.tasks[i][field] = value;
+        break;
+      }
+    }
   }
 });
 

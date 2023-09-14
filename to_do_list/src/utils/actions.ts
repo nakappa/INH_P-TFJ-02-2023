@@ -92,7 +92,7 @@ export async function del(task_id:number, user: User) {
     });
 }
 
-export async function change( requestType: string, task_id:number, user: User, value: any) {
+export async function change( requestType: string, task_id: number, user: User, value: any) {
   const { tasks } = user,
   
         fields = JSON.stringify({
@@ -110,6 +110,7 @@ export async function change( requestType: string, task_id:number, user: User, v
           if (task_id == tasks[i].id) {
             if (requestType == 'change-task') tasks[i].act = value;
             if (requestType == 'change-title') tasks[i].title = value;
+            if (requestType == 'change-description') tasks[i].description = value;
             break;
           }
           

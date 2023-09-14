@@ -19,7 +19,7 @@ defineProps<{ task_id: number; user: User }>();
       </div>
     </div>
     
-    <TextArea name="description" desc="Descrição da tarefa" />
+    <TextArea :task_id="task_id" :user="user" />
   </li>
 </template>
 
