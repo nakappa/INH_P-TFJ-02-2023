@@ -75,7 +75,6 @@ export async function add(user: User) {
           task: fieldTask
         });
 
-        console.log('entrei')
   await fetch(`${baseURL}/users/update`, config('put', fields))
     .then(res => res.ok && res.json())
     .then(res => {
