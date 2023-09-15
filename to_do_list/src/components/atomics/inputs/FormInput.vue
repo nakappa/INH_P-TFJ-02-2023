@@ -6,6 +6,10 @@ import { ref, watch } from 'vue';
         value = ref<string>('');
   
   watch(value, ()=> props.values[props.name] = value.value);
+
+  function labelClick() {
+    (document.querySelector(`[name="${props.name}"]`) as HTMLElement).focus();
+  }
 </script>
 
 <template>
@@ -16,7 +20,7 @@ import { ref, watch } from 'vue';
       required
     >
 
-    <label>{{ label }}</label>
+    <label @click="labelClick">{{ label }}</label>
   </div>
 </template>
 
@@ -29,7 +33,7 @@ import { ref, watch } from 'vue';
   .field input {
     width: 100%;
     height: 48px;
-    padding: 12px;
+    padding: 12px 12px 8px;
     border: none;
     outline: none;
     border-radius: 180px;
@@ -42,6 +46,7 @@ import { ref, watch } from 'vue';
     position: absolute;
     top: 11px;
     left: 12px;
+    cursor: text;
     color: var(--secondary);
     transition: .75s all;
   }

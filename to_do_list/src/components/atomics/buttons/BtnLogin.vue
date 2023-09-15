@@ -1,12 +1,8 @@
 <script setup lang="ts">
-  import type { User } from '@/types/Users';
-  import { login } from '@/utils/actions';
-
-  defineProps<{ user:User, values: any }>();
 </script>
 
 <template>
-  <button type="submit" class="btn login" @click="login(values, user)">
+  <button type="submit" class="btn login">
     login
     <span class="material-symbols-outlined">login</span>
   </button>

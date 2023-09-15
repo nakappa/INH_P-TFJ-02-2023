@@ -1,26 +1,15 @@
 <script setup lang="ts">
-  import { ref, watch } from 'vue';
 	import type { User } from '@/types/Users';
   import FormLogin from './molecules/FormLogin.vue';
   import UserLogged from './molecules/UserLogged.vue';
 
-  const props = defineProps<{ user: User}>(),
-  //@ts-ignore
-        logged = ref<boolean>(sessionStorage?.getItem('logged') || false);
-
-  watch(props, () =>
-    props.user.id < 0
-    //@ts-ignore
-      ? logged.value = false
-    //@ts-ignore
-      : logged.value = true
-  ), { implements: true };
+  defineProps<{ user: User }>();
 </script>
 
 <template>
 	<header class="header">
 		<h1 class="title">Lista de Tarefas</h1>
-		<FormLogin v-if="!logged" :user="user" />
+		<FormLogin v-if="user.id < 0" :user="user" />
 		<UserLogged v-else :user="user" />
 	</header>
 </template>

@@ -6,10 +6,3 @@ export interface User {
   cpf: number;
   tasks: Array<Task>
 }
-
-export const noUser: User = {
-  id: -1,
-  cpf: 0,
-  name: '',
-  tasks: []
-};

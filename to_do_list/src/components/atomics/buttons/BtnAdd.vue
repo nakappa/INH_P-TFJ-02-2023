@@ -4,18 +4,16 @@
   import { add } from '@/utils/actions';
 
   const props = defineProps<{ user: User }>();
-
+  
+  watch(props, disabled);
+  onMounted(disabled);
+  
   function disabled() {
     const btn = document.querySelector('.add') as HTMLElement;
     props.user.id < 0
-      ? btn.setAttribute('disabled', '')
-      : btn.removeAttribute('disabled');
+      ? btn?.setAttribute('disabled', '')
+      : btn?.removeAttribute('disabled');
   }
-
-  watch(props, disabled);
-  onMounted(disabled)
-
-  console.log(props.user.id)
 </script>
 
 <template>

@@ -3,16 +3,17 @@
   import BtnLogin from '../atomics/buttons/BtnLogin.vue';
 	import FormInput from '../atomics/inputs/FormInput.vue';
 import { reactive } from 'vue';
+import { login } from '@/utils/actions';
 
   defineProps<{ user: User }>();
   const values = reactive({ cpf: 0, password: ''});
 </script>
 
 <template>
-	<form class="form-login">
+	<form class="form-login" @submit.prevent="login(values, user)">
 		<FormInput name="cpf" label="CPF" :values="values" />
 		<FormInput name="password" label="Password" :values="values" />
-		<BtnLogin :user="user" :values="values"/>
+		<BtnLogin />
 	</form>
 </template>
 

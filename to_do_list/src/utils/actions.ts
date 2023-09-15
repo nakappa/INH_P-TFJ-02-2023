@@ -1,9 +1,17 @@
-import { noUser, type User } from "@/types/Users";
+import type { User } from "@/types/Users";
 import { baseURL } from "./service";
 import type { Task } from "@/types/Task";
 
 let msg: string;
-const config = (method: string, body: any) => {
+
+const noUser: User = {
+  id: -1,
+  cpf: 0,
+  name: '',
+  tasks: []
+},
+
+config = (method: string, body: any) => {
   return {
     method: method.toUpperCase(),
     body: body,
@@ -26,20 +34,26 @@ export async function login(values: any, user: User) {
         if (res.status) {
           //@ts-ignore
           for (const field in user) user[field] = res.user[field];
+          msg = res?.msg;
           sessionStorage.setItem('user', JSON.stringify(res.user));
 
         } else {
           //@ts-ignore
           for (const field in user) user[field] = noUser[field];
+          console.log(msg)
+          msg = res?.msg;
           sessionStorage?.removeItem('user');
         }
       });
+
+  msg != undefined && alert(msg);
 }
 
-export function logout(user: User) {
+export async function logout(user: User) {
   //@ts-ignore
-  for (const field in user) user[field] = noUser[field];
+  for (const field in user) await (user[field] = noUser[field]);
   sessionStorage.clear();
+  console.log(noUser)
 }
 
 export async function add(user: User) {
@@ -61,13 +75,16 @@ export async function add(user: User) {
           task: fieldTask
         });
 
+        console.log('entrei')
   await fetch(`${baseURL}/users/update`, config('put', fields))
     .then(res => res.ok && res.json())
     .then(res => {
       msg = res.msg;
       res.status && tasks.push(fieldTask);
-      sessionStorage.setItem('user', JSON.stringify(user));
     });
+    
+  setTimeout(() => alert(msg), 475);
+  sessionStorage.setItem('user', JSON.stringify(user));
 }
 
 export async function del(task_id:number, user: User) {
@@ -80,17 +97,27 @@ export async function del(task_id:number, user: User) {
   await fetch(`${baseURL}/users/delete`, config('delete', fields))
     .then(res => res.ok && res.json())
     .then(res => {
-      if (res.status)
-        for (let i: number = 0; i < tasks.length; i++)
-          if (task_id == tasks[i].id) {
-            tasks?.splice(i, 1);
-            break;
-          }
+      if (res.status) {
+        const container = document.querySelector('.tasks') as HTMLElement;
+        container?.classList.add('removed');
+        setTimeout(() => {
+          container?.classList.remove('removed');
+          
+          for (let i: number = 0; i < tasks.length; i++)
+            if (task_id == tasks[i].id) {
+              tasks?.splice(i, 1);
+              break;
+            }
+            
+          sessionStorage.setItem('user', JSON.stringify(user));
+        }, 450);
+      }
           
       msg = res.msg;
-      sessionStorage.setItem('user', JSON.stringify(user));
     });
-}
+
+    setTimeout(() => alert(msg), 475);
+  }
 
 export async function change( requestType: string, task_id: number, user: User, value: any) {
   const { tasks } = user,

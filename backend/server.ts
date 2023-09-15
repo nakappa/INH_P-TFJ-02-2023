@@ -18,10 +18,11 @@ app.get('/users', (req, res) => {
 //@ts-ignore
 app.post('/users/validate', (req, res) => {
   const status: boolean = false,
+        msg: string = 'Usuário ou senha inválidos!!!',
         user: User = users.filter(item => item.cpf == req.body.cpf)[0];
         
   if (user) return res.json({ status: !status, user: user });
-  return res.json({ status: status, user: user });
+  return res.json({ status: status, user: user, msg: msg });
 });
 
 //@ts-ignore

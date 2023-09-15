@@ -1,10 +1,16 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
-  import { noUser, type User } from './types/Users';
   import HeaderContent from './components/HeaderContent.vue';
   import MainContent from './components/MainContent.vue';
+  
   //@ts-ignore
-  const user = reactive<User>(JSON.parse(sessionStorage.getItem('user')) || noUser);
+  const user = reactive<User>(JSON.parse(sessionStorage.getItem('user'))
+  || {
+    id: -1,
+    name: '',
+    cpf: 0,
+    tasks: []
+  });
 </script>
 
 <template>
