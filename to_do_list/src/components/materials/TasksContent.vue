@@ -47,7 +47,7 @@
   }
 
   .tasks.create .task:last-child  { animation: create .4s ease-in; }
-  .tasks.removed .task:last-child { animation: removed .4s ease-out forwards; }
+  .tasks .task.removed { animation: removed .4s ease-out forwards; }
 
   @keyframes create {
     0% { transform: scale(0); }
