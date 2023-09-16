@@ -97,7 +97,7 @@ export async function del(task_id:number, user: User) {
     .then(res => res.ok && res.json())
     .then(res => {
       if (res.status) {
-        const container = document.querySelector('.tasks') as HTMLElement;
+        const container = document.querySelector(`[name="task_${task_id}"]`) as HTMLElement;
         container?.classList.add('removed');
         setTimeout(() => {
           container?.classList.remove('removed');
